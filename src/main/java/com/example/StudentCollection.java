@@ -3,10 +3,13 @@ package com.example;
 import java.util.ArrayList;
 
 public class StudentCollection implements IContainer {
-    private ArrayList<Student> students;
+    private static ArrayList<Student> students;
+    private static boolean listCreated = false;
 
     public StudentCollection() {
-        students = new ArrayList<Student>();
+        if (!listCreated)
+            students = new ArrayList<Student>();
+        listCreated = true;
     }
 
     public void addToStudents(Student newStudent) {

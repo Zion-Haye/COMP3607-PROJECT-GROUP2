@@ -3,10 +3,13 @@ package com.example;
 import java.util.ArrayList;
 
 public class FileCollection implements IContainer {
-    private ArrayList<FileItem> files;
+    private static ArrayList<FileItem> files;
+    private static boolean listCreated = false;
 
     public FileCollection() {
-        files = new ArrayList<FileItem>();
+        if (!listCreated)
+            files = new ArrayList<FileItem>();
+        listCreated = true;
     }
 
     public void addToFiles(FileItem newFile) {
