@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class CSVFileReader {
     // Notes: last 2 Positions not being displayed
 
-    public StudentCollection readFile() {
+    public StudentCollection readFile(String filePath) {
 
         ArrayList<String> studentRecord; // ArrayList for individual Record
         // ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>(); //
@@ -22,14 +22,14 @@ public class CSVFileReader {
 
         Student student;
 
-        String filePath = "lib/fileToRename/Sample 3 CSV.csv";
-        String filePath2 = "lib/fileToRename/Sample 5 CSV.csv";
+        //String filePath = "lib/fileToRename/Sample 3 CSV.csv";
+        //String filePath2 = "lib/fileToRename/Sample 5 CSV.csv";
 
         String line = ""; // Line in csv File
         int counter = 1;
 
         try {
-            FileReader fr = new FileReader(filePath2);
+            FileReader fr = new FileReader(filePath);
             // Create File reader and pass filepath
 
             BufferedReader br = new BufferedReader(fr);
