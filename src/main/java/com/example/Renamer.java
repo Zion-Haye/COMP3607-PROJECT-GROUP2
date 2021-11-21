@@ -14,7 +14,7 @@ public class Renamer {
 
         while (studentIterator.hasNext()) {
             Student newStudent = (Student) studentIterator.next();
-            FileItem newFileItem = (FileItem) fileIterator.getItem(newStudent);
+            PDFFileTemplate newFileItem = (PDFFileTemplate) fileIterator.getItem(newStudent);
             // (newStudent.getIdNumber(), newStudent.getFirstName(),
             // newStudent.getLastName());
 

@@ -3,16 +3,18 @@ package com.example;
 import java.util.ArrayList;
 
 public class FileCollection implements IContainer {
-    private static ArrayList<FileItem> files;
+    private static ArrayList<PDFFileTemplate> files;
     private static boolean listCreated = false;
 
     public FileCollection() {
-        if (!listCreated)
-            files = new ArrayList<FileItem>();
-        listCreated = true;
+        if (!listCreated){
+            files = new ArrayList<PDFFileTemplate>();
+            listCreated = true;
+        }
+        //System.out.println(files);
     }
 
-    public void addToFiles(FileItem newFile) {
+    public void addToFiles(PDFFileTemplate newFile) {
         files.add(newFile);
     }
 
@@ -36,15 +38,15 @@ public class FileCollection implements IContainer {
 
         public Object getItem(Object obj) {
             Student student = (Student) obj;
-            FileItem test = (FileItem) getItemByID(student.getParticipantIdentifierNum());
+            PDFFileTemplate test = (PDFFileTemplate) getItemByID(student.getParticipantIdentifierNum());
             if (test == null)
-                test = (FileItem) getItemByName(student.getFullName());
+                test = (PDFFileTemplate) getItemByName(student.getFullName());
             return test;
         }
 
         private Object getItemByID(String participantID) {
 
-            for (FileItem test : files) {
+            for (PDFFileTemplate test : files) {
                 String testName = test.getName();
                 if (testName.contains(participantID))
                     return test;
@@ -54,7 +56,7 @@ public class FileCollection implements IContainer {
 
         private Object getItemByName(ArrayList<String> names) {
             boolean equals;
-            for (FileItem test : files) {
+            for (PDFFileTemplate test : files) {
                 equals = true;
                 String testName = test.getName();
                 for (String name : names)

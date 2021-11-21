@@ -9,7 +9,7 @@ public class FileProcessor {
 
     public static void MissingFiles(IIterator students) {
         String seperator = File.separator;
-        String fileName = "lib" + seperator + "fileToRename" + seperator + "Missing file";
+        String fileName = "lib" + seperator + "filesToRename" + seperator + "Missing file";
 
         try {
             createFile(fileName);

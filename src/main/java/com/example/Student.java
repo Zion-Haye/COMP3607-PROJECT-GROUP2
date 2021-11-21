@@ -17,6 +17,7 @@ public class Student {
         found = false;
         setNames(fullName);
         this.idNumber = idNumber;
+        System.out.println(this);
 
     }
 

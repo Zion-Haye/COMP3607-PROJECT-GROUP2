@@ -7,16 +7,14 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class ZipFileStrategy implements FileStrategy {
+public class ZipFileReader {
     File file;
 
-    @Override
-    public void workOnFile() {
-        
-        
+    public ZipFileReader(File file) {
+        this.file = file;
     }
 
-    private void unZipArchive() throws IOException {
+    public void unZipArchive() throws IOException {
         byte[] buffer = new byte[1024];
         ZipInputStream unZipper = new ZipInputStream(new FileInputStream(file));
         ZipEntry entry = unZipper.getNextEntry();
@@ -49,11 +47,5 @@ public class ZipFileStrategy implements FileStrategy {
         unZipper.close();
     }
 
-
-    public ZipFileStrategy(File file) {
-        this.file = file;
-    }
-
-    
     
 }

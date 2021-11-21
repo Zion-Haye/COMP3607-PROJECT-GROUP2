@@ -1,16 +1,34 @@
 package com.example;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CSVFileReader {
+public class CSVFileReader{
     // Notes: last 2 Positions not being displayed
+    private static File file = null;
+    
+    public void saveLatestFile(File newFile){
+        if (file.lastModified() < newFile.lastModified())
+            file = newFile;
+    }
+    public CSVFileReader(File newFile){
+        //System.out.println(file.getName());
+        if (newFile.getName().contains("._")){
+            System.out.println("Invalid CSV");
+        }
+        else if (file == null)
+            this.file = newFile;
+        else
+            saveLatestFile(newFile);
+        System.out.println(file.getName());
+    } 
 
-    public StudentCollection readFile(String filePath) {
+    public void readFile() {
 
         ArrayList<String> studentRecord; // ArrayList for individual Record
         // ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>(); //
@@ -29,7 +47,7 @@ public class CSVFileReader {
         int counter = 1;
 
         try {
-            FileReader fr = new FileReader(filePath);
+            FileReader fr = new FileReader(file);
             // Create File reader and pass filepath
 
             BufferedReader br = new BufferedReader(fr);
@@ -63,7 +81,7 @@ public class CSVFileReader {
                         ArrayList<String> participantIDDetails = new ArrayList<String>(
                                 Arrays.asList(studentRecord.get(0).split("\\s+")));
                         // System.out.println("Test" + participantIDDetails.size());
-
+                        
                         student = new Student(participantIDDetails.get(1), studentRecord.get(1), studentRecord.get(2));
                         studentLists.addToStudents(student);
                     }
@@ -77,7 +95,7 @@ public class CSVFileReader {
                     System.out.println("###" + test);
             }
             // return table;
-            return studentLists;
+            
 
         } catch (FileNotFoundException e) {
             // Catch Error if the file is not found
@@ -86,7 +104,7 @@ public class CSVFileReader {
             e.printStackTrace();
         }
 
-        return null;
+        
     }
 
 }

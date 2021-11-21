@@ -7,6 +7,7 @@ public class StudentCollection implements IContainer {
     private static boolean listCreated = false;
 
     public StudentCollection() {
+        System.out.println(students);
         if (!listCreated)
             students = new ArrayList<Student>();
         listCreated = true;

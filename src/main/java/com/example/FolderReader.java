@@ -2,12 +2,15 @@ package com.example;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class FolderReader {
+    FileCollection fileList = new FileCollection();
+    CSVFileReader csv;
 
-    public FileCollection readFolder(String folderPath) {
+    public void readFolder(String folderPath) {
         // Thoughts
-        FileCollection fileList = new FileCollection();
+       
         // try catch error folder File Not Found Exception?
 
         // Create object and parse dolfer path
@@ -21,35 +24,26 @@ public class FolderReader {
         if (folder.exists()) {
 
             File[] files = folder.listFiles();
+            ZipFileReader zip;
+            
 
-            for (File file : files) {
-
-                if (file.isFile()) {
-                    // check if file
-
-                    // System.out.println(file.getName() + "\n");
-
-                    // FileProcessor fileProcessor = new FileProcessor();
-                    // fileProcessor.getFileName(file);
-
-                    if (file.getName().contains(".pdf")) {
-                        FileItem fileItem = new FileItem(file);
-                        fileList.addToFiles(fileItem);
-                        System.out.println("\n\n" + fileItem.getName());
-                        // fileItem.printImportantDetails();
-                    }
-
-                    // print file name
-                }
-
-                if (file.isDirectory()) {
-                    // check if directory
+            for (File file: files) if (file.getName().contains(".zip")){
+                 zip = new ZipFileReader(file);
+                try{
+                    zip.unZipArchive();
+                }catch (IOException e){
+                    e.printStackTrace();
                 }
             }
+
+            processFiles(folder);
+
+            
 
         } else {
             System.out.println("Folder Does Not Exist.");
         }
+        csv.readFile();
         /*
          * IIterator fileIterator = fileList.createIterator(); /*while
          * (fileIterator.hasNext()){ FileItem test = (FileItem) fileIterator.next(); if
@@ -59,11 +53,35 @@ public class FolderReader {
          * FileItem test = (FileItem) fileIterator.getItem("41856", "Drew", "Jenkins");
          * if (test != null) System.out.println(test.getName());
          */
-        return fileList;
+        
 
         // }catch(FileNotFoundException e){
         // e.printStackTrace();
         // }
+    }
+
+    private void processFiles(File folder){
+        File[] files = folder.listFiles();
+
+            for (File file : files) {
+
+                if (file.isFile()) {
+                 
+                    if (file.getName().contains(".pdf")) {
+                        PDFFileTemplate fileItem = new PDFFileTemplate(file);
+                        fileList.addToFiles(fileItem);
+                        //System.out.println("\n\n" + fileItem.getName());
+                        // fileItem.printImportantDetails();
+                    }else if (file.getName().contains(".csv")){
+                        csv = new CSVFileReader(file);
+                    }
+
+                }
+
+                if (file.isDirectory()) {
+                    processFiles(file);
+                }
+            }
     }
 
 }

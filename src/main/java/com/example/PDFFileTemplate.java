@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FileItem {
+public class PDFFileTemplate {
     // leaf
 
     private File file;
@@ -13,7 +13,7 @@ public class FileItem {
     private String assignmentFileName;
     // String extractedData;
 
-    public FileItem(File file) {
+    public PDFFileTemplate(File file) {
         this.file = file;
         namesList = new ArrayList<String>();
         getImportantDetails();
@@ -40,22 +40,23 @@ public class FileItem {
         // String fileName = "lib/renamedFiles/test.docx";
 
         String seperator = File.separator;
-        String ogFileDirectory = "lib" + seperator + "fileToRename";
-        String newFileDirectory = ogFileDirectory + seperator + "renamedFiles";
-        File oldFile = new File(ogFileDirectory + seperator + getName());
+        String newFileDirectory = "lib" + seperator + "filesToRename" + seperator + "renamedFiles";
+        
         File newFile = new File(newFileDirectory + seperator + newFileName + getAssignmentFileName()); // takes in file
                                                                                                        // path
 
         File f = new File(newFileDirectory);
         f.mkdirs();
 
-        isRenamed = oldFile.renameTo(newFile); // take in file , returns bool
+        isRenamed = file.renameTo(newFile); // take in file , returns bool
+    
 
         if (isRenamed) {
+            file = newFile;
             System.out.println("Rename Successful!" + newFileName);
         } else {
             System.out.println("Rename Failed!");
-            System.out.println(ogFileDirectory + seperator + getName());
+            System.out.println(file.getPath());
             System.out.println(newFileDirectory + seperator + newFileName + getAssignmentFileName() + "\n");
         }
 
@@ -85,6 +86,10 @@ public class FileItem {
                 + assignmentFileName);
 
         // System.out.println(getImportantDetails() + "\n\n");
+    }
+
+    public String toString(){
+        return file.getName() + "\n";
     }
 
     // get file extension?
