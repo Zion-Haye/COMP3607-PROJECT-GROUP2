@@ -7,7 +7,13 @@ public class FileFixer {
 
         // CSV Reader
         CSVFileReader csvFileReader = new CSVFileReader();
-        StudentCollection studentData = csvFileReader.readFile();// ?
+
+
+
+        String filePath = "lib/filesToRename/Sample 3 CSV.csv";// remove
+        String filePath2 = "lib/filesToRename/Sample 5 CSV.csv";// remove
+
+        StudentCollection studentData = csvFileReader.readFile(filePath);// ?
         IIterator studentIter = studentData.createIterator();
 
         // Student Data Test
@@ -17,7 +23,12 @@ public class FileFixer {
 
         // Folder Reader
         FolderReader folderReader = new FolderReader();
-        FileCollection files = folderReader.readFolder();// ???
+        
+        String folderPath = "lib/filesToRename";// remove
+        String folderPath2 = "lib/filesToRename2";// remove
+
+        FileCollection files = folderReader.readFolder(folderPath);// ???
+
         IIterator fileIter = files.createIterator();
 
         // FileItem test = (FileItem) testIter.getItem(new Student("*", "Cory Chin Pan

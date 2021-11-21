@@ -5,14 +5,14 @@ import java.io.FileNotFoundException;
 
 public class FolderReader {
 
-    public FileCollection readFolder() {
+    public FileCollection readFolder(String folderPath) {
         // Thoughts
         FileCollection fileList = new FileCollection();
         // try catch error folder File Not Found Exception?
 
         // Create object and parse dolfer path
-        String folderPath = "lib/fileToRename";
-        String folderPath2 = "lib/fileToRename2";
+        //String folderPath = "lib/fileToRename";
+        //String folderPath2 = "lib/fileToRename2";
 
         // try{
 
