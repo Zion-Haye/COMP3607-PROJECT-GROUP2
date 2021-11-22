@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CSVFileReader{
-    // Notes: last 2 Positions not being displayed
     private static File file = null;
     
     public void saveLatestFile(File newFile){
@@ -17,35 +16,27 @@ public class CSVFileReader{
             file = newFile;
     }
     public CSVFileReader(File newFile){
-        //System.out.println(file.getName());
-        if (newFile.getName().contains("._")){
+        if (newFile.getName().contains("._")){//Skipping MacTempFile
             System.out.println("Invalid CSV");
         }
-        else if (file == null)
-            this.file = newFile;
-        else
+        else if (file == null)  //if it is the first valid file we make this the one saved
+            file = newFile;
+        else                    //keeps the csv that was last modified
             saveLatestFile(newFile);
-        System.out.println(file.getName());
     } 
 
-    public void readFile() {
+    public void readFile() {//Reading students from csv file into student collection
 
-        ArrayList<String> studentRecord; // ArrayList for individual Record
-        // ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>(); //
-        // Array List of ArrayList
-        // ArrayList < String[] > table = new ArrayList<String[]>();
+        //Initialization
+        ArrayList<String> studentRecord;
         StudentCollection studentLists = new StudentCollection();
-        IIterator studentIterator = studentLists.createIterator();
-        // ArrayList<Student> studentData = new ArrayList<Student>();
 
         Student student;
 
-        //String filePath = "lib/fileToRename/Sample 3 CSV.csv";
-        //String filePath2 = "lib/fileToRename/Sample 5 CSV.csv";
-
-        String line = ""; // Line in csv File
+        String line = ""; 
         int counter = 1;
 
+        //Reading frfom the file
         try {
             FileReader fr = new FileReader(file);
             // Create File reader and pass filepath
@@ -54,33 +45,14 @@ public class CSVFileReader{
             // Create Buffer reader and pass file reader
 
             while ((line = br.readLine()) != null) { // checks next line
-                // System.out.println(line);
+    
                 studentRecord = new ArrayList<String>(Arrays.asList(line.split(",")));
-                // String[] record = line.split(",");
-                // System.out.println(record);
-                // System.out.println(record.size());
 
-                // System.out.println(record.get(0) + " " + record.get(1) + " " + record.get(2)
-                // + "\n");
-                // table.add(record);
-
-                // String[] participantIdentifier = studentRecord.get(0).split("//s+");// Get
-                // number from participant
-                // student = new Student(participantIdentifier[1], studentRecord.get(1),
-                // studentRecord.get(2)); // record.
-                // String participantID = studentRecord.get(0);
-                // String[] participantIDDetails = participantID.split("//s+");
-
-                // ArrayList<String> participantIDDetails = new ArrayList<String>(
-                // Arrays.asList(studentRecord.get(0).split(" ")));
-                // System.out.println("Test" + participantIDDetails.size());
-
-                // Skip Header Row
+                // Making sure the id / names are in the record
                 if (!(studentRecord.get(0).isEmpty() || studentRecord.get(1).isEmpty()))
-                    if (counter > 1) {
+                    if (counter > 1) { //skipping the header row
                         ArrayList<String> participantIDDetails = new ArrayList<String>(
                                 Arrays.asList(studentRecord.get(0).split("\\s+")));
-                        // System.out.println("Test" + participantIDDetails.size());
                         
                         student = new Student(participantIDDetails.get(1), studentRecord.get(1), studentRecord.get(2));
                         studentLists.addToStudents(student);
@@ -89,22 +61,13 @@ public class CSVFileReader{
                 counter++;
             }
             br.close();
-            while (studentIterator.hasNext()) {
-                Student test = (Student) studentIterator.next();
-                if (test != null)
-                    System.out.println("###" + test);
-            }
-            // return table;
-            
-
-        } catch (FileNotFoundException e) {
-            // Catch Error if the file is not found
+        // Catching errors Error if the file is not found
+        } catch (FileNotFoundException e) {  
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        
     }
 
 }

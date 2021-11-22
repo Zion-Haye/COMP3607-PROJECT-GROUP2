@@ -1,5 +1,5 @@
 package com.example;
 
-public interface IContainer {
+public interface IContainer {//Iterator Container Interface
     public IIterator createIterator();
 }

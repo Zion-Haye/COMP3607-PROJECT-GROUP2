@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class FileProcessor {
 
-    public static void MissingFiles(IIterator students) {
+    public static void MissingFiles(IIterator students) { // Making file for students that are missing submission files
         String seperator = File.separator;
         String fileName = "lib" + seperator + "filesToRename" + seperator + "Missing file";
 
@@ -16,7 +16,7 @@ public class FileProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        while (students.hasNext()) {
+        while (students.hasNext()) {//Checking through the students list checking if they have renamed a file yet
             Student test = (Student) students.next();
             if (!test.isFound()) {
                 try {
@@ -28,7 +28,7 @@ public class FileProcessor {
         }
     }
 
-    private static void createFile(String fileName) throws IOException {
+    private static void createFile(String fileName) throws IOException {//Creating a new file 
         String str = "Students With Missing Files: \n";
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         writer.write(str);
@@ -36,7 +36,7 @@ public class FileProcessor {
         writer.close();
     }
 
-    private static void appendToFile(String fileName, String str) throws IOException {
+    private static void appendToFile(String fileName, String str) throws IOException {//appending the student to the file
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
         writer.append(str);

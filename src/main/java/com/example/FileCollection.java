@@ -3,28 +3,27 @@ package com.example;
 import java.util.ArrayList;
 
 public class FileCollection implements IContainer {
-    private static ArrayList<PDFFileTemplate> files;
-    private static boolean listCreated = false;
+    private static ArrayList<PDFFileTemplate> files; //Static List so that the collection won't need to be returned
+    private static boolean listCreated = false; //To know whether a list have already been created
 
-    public FileCollection() {
+    public FileCollection() {//Constructor
         if (!listCreated){
             files = new ArrayList<PDFFileTemplate>();
             listCreated = true;
         }
-        //System.out.println(files);
     }
 
-    public void addToFiles(PDFFileTemplate newFile) {
+    public void addToFiles(PDFFileTemplate newFile) {//Add file to collection
         files.add(newFile);
     }
 
     @Override
-    public IIterator createIterator() {
+    public IIterator createIterator() { //To create the iterator
         FileIterator results = new FileIterator();
         return results;
     }
 
-    private class FileIterator implements IIterator {
+    private class FileIterator implements IIterator {//Making a private file iterator
         private int position = 0;
 
         public boolean hasNext() {
@@ -36,17 +35,20 @@ public class FileCollection implements IContainer {
             }
         }
 
-        public Object getItem(Object obj) {
+        public Object getItem(Object obj) {// searching in multiple different ways to find the file
             Student student = (Student) obj;
+            //first by Participant ID
             PDFFileTemplate test = (PDFFileTemplate) getItemByParticipantID(student.getParticipantIdentifierNum());
+            //then by Student ID
             if (test == null)
                 test = (PDFFileTemplate) getItemByStudentID(student.getIdNumber());
+            //finally by student's full name
             if (test == null)
                 test = (PDFFileTemplate) getItemByName(student.getFullName());
             return test;
         }
 
-        private Object getItemByParticipantID(String participantID) {
+        private Object getItemByParticipantID(String participantID) {//Searching by Participant ID
 
             for (PDFFileTemplate test : files) {
                 String testName = test.getName();
@@ -56,7 +58,7 @@ public class FileCollection implements IContainer {
             return null;
         }
 
-        private Object getItemByStudentID(String studentID) {
+        private Object getItemByStudentID(String studentID) {//Searching by Student ID
 
             for (PDFFileTemplate test : files) {
                 String testName = test.getName();
@@ -66,7 +68,7 @@ public class FileCollection implements IContainer {
             return null;
         }
 
-        private Object getItemByName(ArrayList<String> names) {
+        private Object getItemByName(ArrayList<String> names) {//Searching by Name
             boolean equals;
             for (PDFFileTemplate test : files) {
                 equals = true;

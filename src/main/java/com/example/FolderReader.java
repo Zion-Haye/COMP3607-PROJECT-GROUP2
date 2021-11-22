@@ -1,24 +1,14 @@
 package com.example;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class FolderReader {
     FileCollection fileList = new FileCollection();
     CSVFileReader csv;
 
-    public void readFolder(String folderPath) {
-        // Thoughts
-       
-        // try catch error folder File Not Found Exception?
-
-        // Create object and parse dolfer path
-        //String folderPath = "lib/fileToRename";
-        //String folderPath2 = "lib/fileToRename2";
-
-        // try{
-
+    public void readFolder(String folderPath) {// Reading the folder for files to rename
+        
         File folder = new File(folderPath);
 
         if (folder.exists()) {
@@ -27,7 +17,7 @@ public class FolderReader {
             ZipFileReader zip;
             
 
-            for (File file: files) if (file.getName().contains(".zip")){
+            for (File file: files) if (file.getName().contains(".zip")){//Unzipping Archives
                  zip = new ZipFileReader(file);
                 try{
                     zip.unZipArchive();
@@ -36,7 +26,7 @@ public class FolderReader {
                 }
             }
 
-            processFiles(folder);
+            processFiles(folder);//Processing the files inside the folder
 
             
 
@@ -44,41 +34,28 @@ public class FolderReader {
             System.out.println("Folder Does Not Exist.");
         }
         csv.readFile();
-        /*
-         * IIterator fileIterator = fileList.createIterator(); /*while
-         * (fileIterator.hasNext()){ FileItem test = (FileItem) fileIterator.next(); if
-         * (test != null) System.out.println(test.getName()); }
-         */
-        /*
-         * FileItem test = (FileItem) fileIterator.getItem("41856", "Drew", "Jenkins");
-         * if (test != null) System.out.println(test.getName());
-         */
-        
-
-        // }catch(FileNotFoundException e){
-        // e.printStackTrace();
-        // }
+       
     }
 
-    private void processFiles(File folder){
+    private void processFiles(File folder){//Processing the folders recursively
         File[] files = folder.listFiles();
 
             for (File file : files) {
 
                 if (file.isFile()) {
                  
-                    if (file.getName().contains(".pdf")) {
+                    if (file.getName().contains(".pdf")) {//If it is a pdf check to see what type of pdf
 
                         PDFFileTemplate fileItem = fileType(file);
                         fileList.addToFiles(fileItem);
                         
-                    }else if (file.getName().contains(".csv")){
+                    }else if (file.getName().contains(".csv")){//if it is a csv attempt to add it to the csv reader
                         csv = new CSVFileReader(file);
                     }
 
                 }
 
-                if (file.isDirectory()) {
+                if (file.isDirectory()) {// if it is a folder check the folder for files
                     processFiles(file);
                 }
             }
@@ -86,17 +63,19 @@ public class FolderReader {
 
     }
 
-    private PDFFileTemplate fileType(File file){
+    private PDFFileTemplate fileType(File file){// Checking to see what type of naming convention the file is using
         String fileName = file.getName();
         String[] fileNameParts = fileName.split("_");
         String[] myElearningCode = fileNameParts[0].split("-");
-        if (fileName.contains("_assignsubmission_file_")){
+        
+        if (fileName.contains("_assignsubmission_file_")){ //  If it follows the convention needed to upload it is a medium file
             return new PDFFileMedium(file);
         }else if (myElearningCode.length>1 && NumChecker.isNumeric(myElearningCode[0])
-                    && NumChecker.isNumeric(myElearningCode[1])){
+                    && NumChecker.isNumeric(myElearningCode[1])){ //  If it follows the myElearning convention it is a basic file
             return new PDFFileMedium(file);
         }
-        return new PDFFileHard(file);
+        
+        return new PDFFileHard(file); // if it is neither of the 2 then it is a raw file
         
     }
 
