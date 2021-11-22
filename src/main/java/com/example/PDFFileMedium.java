@@ -41,7 +41,7 @@ public class PDFFileMedium extends PDFFileTemplate {
     @Override
     protected void getImportantDetails() {
         ArrayList<String> fullFileName = new ArrayList<String>(Arrays.asList(getName().split("_")));
-        namesList = (ArrayList<String>) Arrays.asList(fullFileName.get(0).split(" "));
+        namesList = new ArrayList<String> (Arrays.asList(fullFileName.get(0).split(" ")));
         
 
 
