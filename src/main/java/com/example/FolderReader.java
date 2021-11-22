@@ -3,6 +3,7 @@ package com.example;
 import java.io.File;
 import java.io.IOException;
 
+
 public class FolderReader {
     FileCollection fileList = new FileCollection();
     CSVFileReader csv;

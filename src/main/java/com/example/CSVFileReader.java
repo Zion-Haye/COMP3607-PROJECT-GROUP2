@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 public class CSVFileReader{
     private static File file = null;
     

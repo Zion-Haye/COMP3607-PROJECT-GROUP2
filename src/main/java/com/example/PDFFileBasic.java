@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
 public class PDFFileBasic extends PDFFileTemplate { // PDF Basic File
 
     public PDFFileBasic(File file) { //Constructor

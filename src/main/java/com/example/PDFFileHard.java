@@ -2,6 +2,7 @@ package com.example;
 
 import java.io.File;
 
+
 public class PDFFileHard extends PDFFileTemplate {
 
     public PDFFileHard(File file) {//Constructor

@@ -2,6 +2,7 @@ package com.example;
 
 import java.io.File;
 
+
 public class PDFFileMedium extends PDFFileTemplate {
 
     public PDFFileMedium(File file) {//Constructor

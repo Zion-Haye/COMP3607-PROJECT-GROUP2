@@ -17,6 +17,7 @@ public class FileCollection implements IContainer { // Concrete Aggregate File C
         files.add(newFile);
     }
 
+    
     @Override
     public IIterator createIterator() { //To create the iterator
         FileIterator results = new FileIterator();
