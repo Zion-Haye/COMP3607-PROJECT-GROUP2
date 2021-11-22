@@ -38,17 +38,29 @@ public class FileCollection implements IContainer {
 
         public Object getItem(Object obj) {
             Student student = (Student) obj;
-            PDFFileTemplate test = (PDFFileTemplate) getItemByID(student.getParticipantIdentifierNum());
+            PDFFileTemplate test = (PDFFileTemplate) getItemByParticipantID(student.getParticipantIdentifierNum());
+            if (test == null)
+                test = (PDFFileTemplate) getItemByStudentID(student.getIdNumber());
             if (test == null)
                 test = (PDFFileTemplate) getItemByName(student.getFullName());
             return test;
         }
 
-        private Object getItemByID(String participantID) {
+        private Object getItemByParticipantID(String participantID) {
 
             for (PDFFileTemplate test : files) {
                 String testName = test.getName();
                 if (testName.contains(participantID))
+                    return test;
+            }
+            return null;
+        }
+
+        private Object getItemByStudentID(String studentID) {
+
+            for (PDFFileTemplate test : files) {
+                String testName = test.getName();
+                if (testName.contains(studentID))
                     return test;
             }
             return null;

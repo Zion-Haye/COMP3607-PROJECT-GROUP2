@@ -68,10 +68,10 @@ public class FolderReader {
                 if (file.isFile()) {
                  
                     if (file.getName().contains(".pdf")) {
-                        PDFFileTemplate fileItem = new PDFFileTemplate(file);
+
+                        PDFFileTemplate fileItem = new PDFFileBasic(file);
                         fileList.addToFiles(fileItem);
-                        //System.out.println("\n\n" + fileItem.getName());
-                        // fileItem.printImportantDetails();
+                        
                     }else if (file.getName().contains(".csv")){
                         csv = new CSVFileReader(file);
                     }
@@ -82,6 +82,22 @@ public class FolderReader {
                     processFiles(file);
                 }
             }
+
+
+    }
+
+    private PDFFileTemplate fileType(File file){
+        String fileName = file.getName();
+        String[] fileNameParts = fileName.split("_");
+        String[] myElearningCode = fileNameParts[0].split("-");
+        if (fileName.contains("_assignsubmission_file_")){
+            return new PDFFileMedium(file);
+        }else if (myElearningCode.length>1 && NumChecker.isNumeric(myElearningCode[0])
+                    && NumChecker.isNumeric(myElearningCode[1])){
+            return new PDFFileMedium(file);
+        }
+        return new PDFFileHard(file);
+        
     }
 
 }
