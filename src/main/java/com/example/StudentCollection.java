@@ -2,9 +2,9 @@ package com.example;
 
 import java.util.ArrayList;
 
-public class StudentCollection implements IContainer {
-    private static ArrayList<Student> students;
-    private static boolean listCreated = false;
+public class StudentCollection implements IContainer { // Concrete Aggregate Student Collection
+    private static ArrayList<Student> students;//Static List so that the collection won't need to be returned
+    private static boolean listCreated = false;//To know whether a list have already been created
 
     public StudentCollection() {
         System.out.println(students);
@@ -13,17 +13,17 @@ public class StudentCollection implements IContainer {
         listCreated = true;
     }
 
-    public void addToStudents(Student newStudent) {
+    public void addToStudents(Student newStudent) {//Add student to collection
         students.add(newStudent);
     }
 
     @Override
-    public IIterator createIterator() {
+    public IIterator createIterator() {//To create the iterator
         StudentIterator results = new StudentIterator();
         return results;
     }
 
-    private class StudentIterator implements IIterator {
+    private class StudentIterator implements IIterator {//Making a private concrete file iterator
         private int position = 0;
 
         public boolean hasNext() {
@@ -36,16 +36,11 @@ public class StudentCollection implements IContainer {
         }
 
         @Override
-        public Object getItem(Object obj) {
+        public Object getItem(Object obj) {// Getting Student by indext in collection
             int index = (int) obj;
             return students.get(index);
         }
 
-        /*
-         * public Object getItemByName(String fName, String lName) { for (Student test :
-         * students){ if (fName.equals(test.getFirstName()) &&
-         * lName.equals(test.getLastName())){ return test; } } return null; }
-         */
         @Override
         public Object next() {
             if (this.hasNext()) {

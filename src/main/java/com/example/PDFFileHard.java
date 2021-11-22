@@ -4,12 +4,12 @@ import java.io.File;
 
 public class PDFFileHard extends PDFFileTemplate {
 
-    public PDFFileHard(File file) {
+    public PDFFileHard(File file) {//Constructor
         super(file);
     }
 
     @Override
-    public void renameFile(String newFileName) {
+    public void renameFile(String newFileName) {// Rename file using File Name
         Boolean isRenamed;
        
 
@@ -37,10 +37,7 @@ public class PDFFileHard extends PDFFileTemplate {
     }
 
     @Override
-    protected void getImportantDetails() {
-        namesList.add("N/A");
-        
-
+    protected void getImportantDetails() {//getting the Assignment file Name
 
         assignmentFileName = getName();
         

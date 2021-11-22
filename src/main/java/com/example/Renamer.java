@@ -4,21 +4,19 @@ public class Renamer {
     IIterator fileIterator;
     IIterator studentIterator;
 
-    public Renamer(IIterator students, IIterator files) {
+    public Renamer(IIterator students, IIterator files) {//Constructor
         fileIterator = files;
         studentIterator = students;
     }
 
-    public void renameFiles() {
+    public void renameFiles() {// for each studen searches through the files to rename
         FolderWriter.initialiseFolder();
 
         while (studentIterator.hasNext()) {
             Student newStudent = (Student) studentIterator.next();
             PDFFileTemplate newFileItem = (PDFFileTemplate) fileIterator.getItem(newStudent);
-            // (newStudent.getIdNumber(), newStudent.getFirstName(),
-            // newStudent.getLastName());
 
-            if (newFileItem != null) {
+            if (newFileItem != null) {//if it is found then rename the file
                 newFileItem.renameFile(newFileName(newStudent));
                 newStudent.setFound(true);
             } else {
@@ -28,7 +26,7 @@ public class Renamer {
         }
     }
 
-    private String newFileName(Student stu) {
+    private String newFileName(Student stu) {// creating the submission file name
         String newFile = stu.getFullNameString() + "_";
         newFile += stu.getParticipantIdentifierNum() + "_";
         newFile += "assignsubmission_file_";

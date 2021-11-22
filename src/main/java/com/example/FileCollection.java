@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.ArrayList;
 
-public class FileCollection implements IContainer {
+public class FileCollection implements IContainer { // Concrete Aggregate File COllection
     private static ArrayList<PDFFileTemplate> files; //Static List so that the collection won't need to be returned
     private static boolean listCreated = false; //To know whether a list have already been created
 
@@ -23,7 +23,7 @@ public class FileCollection implements IContainer {
         return results;
     }
 
-    private class FileIterator implements IIterator {//Making a private file iterator
+    private class FileIterator implements IIterator {//Making a private concrete file iterator
         private int position = 0;
 
         public boolean hasNext() {

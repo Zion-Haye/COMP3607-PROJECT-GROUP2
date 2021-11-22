@@ -4,16 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class PDFFileBasic extends PDFFileTemplate {
+public class PDFFileBasic extends PDFFileTemplate { // PDF Basic File
 
-    public PDFFileBasic(File file) {
+    public PDFFileBasic(File file) { //Constructor
         super(file);
     }
 
     @Override
-    public void renameFile(String newFileName) {
+    public void renameFile(String newFileName) {// Rename file using File Name
         Boolean isRenamed;
-        // String fileName = "lib/renamedFiles/test.docx";
 
         String seperator = File.separator;
         String newFileDirectory = "lib" + seperator + "filesToRename" + seperator + "renamedFiles";
@@ -27,12 +26,11 @@ public class PDFFileBasic extends PDFFileTemplate {
         isRenamed = file.renameTo(newFile); // take in file , returns bool
     
 
-        if (isRenamed) {
+        if (isRenamed) {//If the renaming was successful
             file = newFile;
-            System.out.println("Rename Successful!" + newFileName);
+            System.out.println("Rename Successful!");
         } else {
             System.out.println("Rename Failed!");
-            System.out.println(file.getPath());
             System.out.println(newFileDirectory + seperator + newFileName + getAssignmentFileName() + "\n");
         }
 
@@ -40,14 +38,15 @@ public class PDFFileBasic extends PDFFileTemplate {
     }
 
     @Override
-    protected void getImportantDetails() {
+    protected void getImportantDetails() {//getting the Assignment file Name
         ArrayList<String> fullFileName = new ArrayList<String>(Arrays.asList(getName().split("_")));
 
         // ArrayList<String> importantDetails = new ArrayList<String>();
 
         int x;
-        for (x = 1; !NumChecker.isNumeric(fullFileName.get(x)); x++)
-            namesList.add(fullFileName.get(x));
+        for (x = 1; !NumChecker.isNumeric(fullFileName.get(x)); x++){
+            //go Till the Student ID
+        }
 
         x++;
         assignmentFileName = fullFileName.get(x++);

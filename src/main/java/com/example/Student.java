@@ -7,8 +7,6 @@ public class Student {
 
     private String participantIdentifierNum;
     private ArrayList<String> fullName;
-    // private String firstName;
-    // private String lastName;
     private String idNumber;
     private boolean found;
 
@@ -23,12 +21,7 @@ public class Student {
 
     // Modifiers
     public void setNames(String fullName) {
-        this.fullName = new ArrayList<String>(Arrays.asList(fullName.split("\\s+")));// Split full
-                                                                                     // name by white
-                                                                                     // space
-
-        // Issues
-        // Names with more than 2 names
+        this.fullName = new ArrayList<String>(Arrays.asList(fullName.split("\\s+")));
     }
 
     public void setFound(boolean found) {
@@ -63,8 +56,6 @@ public class Student {
     public String toString() {
         String studentDetails;
         studentDetails = getParticipantIdentifierNum() + ",";
-        // studentDetails += getFirstName() + ",";
-        // studentDetails += getLastName() + ",";
         studentDetails += "Full Name: " + getFullNameString() + ",";
         studentDetails += getIdNumber() + "\n";
         return studentDetails;

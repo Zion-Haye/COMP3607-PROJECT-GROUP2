@@ -1,17 +1,15 @@
 package com.example;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PDFFileMedium extends PDFFileTemplate {
 
-    public PDFFileMedium(File file) {
+    public PDFFileMedium(File file) {//Constructor
         super(file);
     }
 
     @Override
-    public void renameFile(String newFileName) {
+    public void renameFile(String newFileName) {// Rename file using File Name
         Boolean isRenamed;
        
 
@@ -39,12 +37,8 @@ public class PDFFileMedium extends PDFFileTemplate {
     }
 
     @Override
-    protected void getImportantDetails() {
-        ArrayList<String> fullFileName = new ArrayList<String>(Arrays.asList(getName().split("_")));
-        namesList = new ArrayList<String> (Arrays.asList(fullFileName.get(0).split(" ")));
-        
-
-
+    protected void getImportantDetails() {//getting the Assignment file Name
+     
         assignmentFileName = getName();
         
     }
