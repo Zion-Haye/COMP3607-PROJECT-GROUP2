@@ -70,9 +70,9 @@ public class FileCollection implements IContainer {
             boolean equals;
             for (PDFFileTemplate test : files) {
                 equals = true;
-                String testName = test.getName();
+                String testName = test.getName().toLowerCase();
                 for (String name : names)
-                    if (!testName.contains(name)) {
+                    if (!testName.contains(name.toLowerCase())) {
                         equals = false;
                         break;
                     }

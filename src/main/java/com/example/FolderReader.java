@@ -69,7 +69,7 @@ public class FolderReader {
                  
                     if (file.getName().contains(".pdf")) {
 
-                        PDFFileTemplate fileItem = new PDFFileBasic(file);
+                        PDFFileTemplate fileItem = fileType(file);
                         fileList.addToFiles(fileItem);
                         
                     }else if (file.getName().contains(".csv")){
