@@ -9,7 +9,7 @@ public class FolderWriter {
 
     public static void initialiseFolder() {
 
-        String folderPath = "lib/fileToRename/renamedFiles";
+        String folderPath = "lib/filesToRename/renamedFiles";
         File folder = new File(folderPath);
 
         if (!folder.exists()) {
