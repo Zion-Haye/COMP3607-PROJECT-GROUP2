@@ -73,7 +73,7 @@ public class FolderReader {
             return new PDFFileMedium(file);
         }else if (myElearningCode.length>1 && NumChecker.isNumeric(myElearningCode[0])
                     && NumChecker.isNumeric(myElearningCode[1])){ //  If it follows the myElearning convention it is a basic file
-            return new PDFFileMedium(file);
+            return new PDFFileBasic(file);
         }
         
         return new PDFFileHard(file); // if it is neither of the 2 then it is a raw file
